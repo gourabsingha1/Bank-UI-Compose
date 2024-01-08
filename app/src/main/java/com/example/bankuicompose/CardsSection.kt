@@ -80,7 +80,9 @@ fun getGradient(
 @Preview
 @Composable
 fun CardsSection() {
+    // Horizontal recyclerview
     LazyRow {
+        // For loop
         items(cards.size) { index ->
             CardItem(index)
         }
@@ -92,16 +94,20 @@ fun CardItem(
     index: Int
 ) {
     val card = cards[index]
+
+    // Add padding end to the last item only
     var lastItemPaddingEnd = 0.dp
     if (index == cards.size - 1) {
         lastItemPaddingEnd = 16.dp
     }
 
+    // Set logo image
     var image = painterResource(id = R.drawable.ic_visa)
     if (card.cardType == "MASTER CARD") {
         image = painterResource(id = R.drawable.ic_mastercard)
     }
 
+    // Box = to put the cards in
     Box(
         modifier = Modifier
             .padding(start = 16.dp, end = lastItemPaddingEnd)
@@ -114,7 +120,7 @@ fun CardItem(
                 .height(160.dp)
                 .clickable {}
                 .padding(vertical = 12.dp, horizontal = 16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.SpaceBetween // Push image to top, then other texts to bottom
         ) {
 
             Image(

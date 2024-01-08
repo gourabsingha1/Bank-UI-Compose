@@ -32,7 +32,7 @@ fun WalletSection() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.SpaceBetween, // Leftmost <big space> Rightmost
         verticalAlignment = Alignment.CenterVertically
     ) {
 
@@ -56,7 +56,7 @@ fun WalletSection() {
                 .clip(RoundedCornerShape(15.dp))
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .clickable {}
-                .padding(6.dp),
+                .padding(6.dp)
         ) {
             Icon(
                 imageVector = Icons.Rounded.Search,

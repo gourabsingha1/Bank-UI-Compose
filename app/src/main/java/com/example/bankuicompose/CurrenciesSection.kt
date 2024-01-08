@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AttachMoney
+import androidx.compose.material.icons.rounded.CurrencyRupee
 import androidx.compose.material.icons.rounded.CurrencyYen
 import androidx.compose.material.icons.rounded.Euro
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
@@ -67,33 +68,35 @@ val currencies = listOf(
     ),
 
     Currency(
-        name = "USD",
+        name = "INR",
         buy = 22.54f,
         sell = 19.40f,
-        icon = Icons.Rounded.AttachMoney
+        icon = Icons.Rounded.CurrencyRupee
     ),
 
     Currency(
-        name = "EUR",
+        name = "BDT",
         buy = 55.76f,
         sell = 39.53f,
-        icon = Icons.Rounded.Euro
+        icon = Icons.Rounded.CurrencyRupee
     ),
 
     Currency(
-        name = "YEN",
+        name = "PKR",
         buy = 11.43f,
         sell = 15.92f,
-        icon = Icons.Rounded.CurrencyYen
+        icon = Icons.Rounded.CurrencyRupee
     ),
 )
 
 @Preview
 @Composable
 fun CurrenciesSection() {
+    /// Initially I want currencies to be invisible
     var isVisible by remember {
         mutableStateOf(false)
     }
+    // Initially, the icon should be up
     var iconState by remember {
         mutableStateOf(Icons.Rounded.KeyboardArrowUp)
     }
@@ -109,7 +112,7 @@ fun CurrenciesSection() {
             modifier = Modifier
                 .clip(RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
                 .background(MaterialTheme.colorScheme.inverseOnSurface)
-                .animateContentSize()
+                .animateContentSize() // Animation while popping
         ) {
 
             Row(
@@ -120,16 +123,17 @@ fun CurrenciesSection() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
+                // Arrow icon + Currencies text
                 Box(modifier = Modifier
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.secondary)
-                    .clickable {
-                        isVisible = !isVisible
+                    .clickable { // If state = isVisible, change state as well as icon
                         iconState = if (isVisible) {
-                            Icons.Rounded.KeyboardArrowUp
-                        } else {
                             Icons.Rounded.KeyboardArrowDown
+                        } else {
+                            Icons.Rounded.KeyboardArrowUp
                         }
+                        isVisible = !isVisible
                     }
                 ) {
                     Icon(
@@ -167,7 +171,9 @@ fun CurrenciesSection() {
                         .background(MaterialTheme.colorScheme.background)
                 ) {
 
+                    // Get the layout
                     val boxWithConstraintsScope = this
+                    // Divide layout into 3 columns
                     val width = boxWithConstraintsScope.maxWidth / 3
 
                     Column(
@@ -190,7 +196,6 @@ fun CurrenciesSection() {
                                 color = MaterialTheme.colorScheme.onBackground
                             )
 
-
                             Text(
                                 modifier = Modifier.width(width),
                                 text = "Buy",
@@ -199,7 +204,6 @@ fun CurrenciesSection() {
                                 color = MaterialTheme.colorScheme.onBackground,
                                 textAlign = TextAlign.End
                             )
-
 
                             Text(
                                 modifier = Modifier.width(width),
@@ -235,6 +239,7 @@ fun CurrenciesSection() {
 fun CurrencyItem(index: Int, width: Dp) {
     val currency = currencies[index]
 
+    // {Icon + name} + buy + sell, in this row
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -242,6 +247,7 @@ fun CurrencyItem(index: Int, width: Dp) {
         verticalAlignment = Alignment.CenterVertically
     ) {
 
+        // Currency icon + name, in this row
         Row(
             modifier = Modifier.width(width),
             verticalAlignment = Alignment.CenterVertically

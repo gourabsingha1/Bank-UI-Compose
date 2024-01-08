@@ -68,9 +68,11 @@ fun FinanceSection() {
             modifier = Modifier.padding(16.dp)
         )
 
+        // Horizontal recyclerview
         LazyRow {
-            items(financeList.size) {
-                FinanceItem(it)
+            // For loop
+            items(financeList.size) {index ->
+                FinanceItem(index)
             }
         }
     }
@@ -81,11 +83,14 @@ fun FinanceItem(
     index: Int
 ) {
     val finance = financeList[index]
+
+    // Add padding end to the last item only
     var lastPaddingEnd = 0.dp
     if (index == financeList.size - 1) {
         lastPaddingEnd = 16.dp
     }
 
+    // Box = to put the financeSection in
     Box(modifier = Modifier.padding(start = 16.dp, end = lastPaddingEnd)) {
         Column(
             modifier = Modifier
@@ -97,6 +102,7 @@ fun FinanceItem(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
 
+            // Icon box contains icon image, icon contentDescription and icon color
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))

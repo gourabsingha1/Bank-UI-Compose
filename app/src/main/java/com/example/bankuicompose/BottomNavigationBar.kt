@@ -44,6 +44,7 @@ val items = listOf(
 fun BottomNavigationBar() {
     NavigationBar {
         Row(
+            // ColorScheme = changes color according to wallpaper
             modifier = Modifier.background(MaterialTheme.colorScheme.inverseOnSurface)
         ) {
 
